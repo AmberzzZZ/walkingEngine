@@ -1,0 +1,25 @@
+# Normal views
+vi image jpeg lower
+vi image jpeg upper
+
+vid all representation:FieldLines:image
+vid all representation:BallPercept:image
+vid all representation:PenaltyMarkPercept:image
+vid all representation:PlayersPercept:image
+vid all representation:BodyContour
+vid all representation:BallSpots:image
+vid all module:CNSBallPerceptor:candidates
+vid all module:CNSBallPerceptor:samplePoints
+#vid all representation:BallPercept2017:image
+vid all module:CNSBallPerceptor:ballRegion
+vid all module:CNSBallPerceptor:glcm
+vid all representation:GoalPercept2017:image
+#vid all horizon
+
+# Segmented views
+vi ColoredImage upper
+vi ColoredImage lower
+
+# 3-D image views
+v3 image jpeg lower
+v3 image jpeg upper

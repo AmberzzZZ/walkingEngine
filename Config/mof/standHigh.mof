@@ -1,0 +1,12 @@
+motion_id = standHigh
+
+label start
+stiffness 0 0 0 0  0 0 0 0 0 0 0 0 0 0 75 75 75 75 75 75 75 75 75 75 75 75 0
+
+label loop
+"   HY     HP    LSP    LSR    LEY    LER  _LWY_  _LH_     RSP    RSR    REY    RER  _RWY_   _RH_   LHYP    LHR    LHP    LKP    LAP    LAR   RHYP    RHR    RHP    RKP    RAP    RAR Int  Dur
+    0      0    90.0    10     0      0.0  0.0    0.0      90.0   0      0.0    0.0  0.0     0.0    0.0    0.0     0.0    0.0    0.0    0.0    0.0    0.0   0.0    0.0    0.0    0.0   1 1000
+     
+transition standHigh standHigh loop
+transition allMotions extern start
+

@@ -1,0 +1,18 @@
+call Includes/Fast
+
+# field views
+vf worldState
+vfd worldState fieldLines
+vfd worldState fieldPolygons
+vfd worldState representation:RobotPose
+vfd worldState representation:TeammateData
+vfd worldState representation:TeammateDataRoleBehavior
+vfd worldState representation:Role
+
+
+# views relative to robot
+vfd worldState origin:RobotPose
+vfd worldState representation:BallModel
+vfd worldState representation:MotionRequest
+vfd worldState representation:ObstacleModel:CenterCross
+vfd worldState module:Behavior2015:shootPath

@@ -1,0 +1,93 @@
+motion_id = sideKickHardRight
+
+"kick used for SideKick selection
+"Kick uses RightFoot
+"KickDistance:
+"unlimited
+"KickRange:
+"ball.x < 280 &&  -60 < ball.y < 85
+
+label start
+
+"HP HT  AL1 AL2 AL3AL4	AR1 AR2 AR3 AR4		LL0 LL1 LL2 LL3 LL4 LL5		LR0 LR1 LR2 LR3 LR4 LR5 Int Dur   
+"stand
+stiffness 100 100 100 100 100 100 0 0 100 100 100 100 0 0 	100 100 100 100 100 100 100 100 100 100 100 100 500
+0 28  90 30 0 0 - -	90 -30 0 0 - -	 	 0 1.8 -26 71 -45 -1.8	0 -1.8 -26 71 -45 1.8 			1  400
+"transition standUpFrontNao standUpFrontNao start
+"transition standUpBackNao standUpBackNao start
+
+0 28  90 30 0 0 - -	90 -30 0 0 - -			 0 1.8 -30 60 -30 -1.8 	0 -1.8 -30 60 -30 1.8 		1  600
+"transition standUpFrontNao standUpFrontNao start
+"transition standUpBackNao standUpBackNao start
+
+0 28  90 30 0 0 - -	90 -30 0 0 - -			 0 1.8 -30 60 -30 -1.8 		0 -1.8 -30 60 -30 1.8 	1  400
+"transition standUpFrontNao standUpFrontNao start
+"transition standUpBackNao standUpBackNao start
+
+"now standing stable prepare Kick
+0 28  	  90 30 0 0 - -	90 -30 0 0 - -		 	0 -25 -20 40 -20 22	0 -30 -20 40 -20 30 	1 1000
+"transition standUpFrontNao standUpFrontNao start
+"transition standUpBackNao standUpBackNao start
+
+"shijian buneng duan !
+0 28 	  90 30 0 0 - - 90 -30 0 0 - -		 		0 -25 -30 60 -30 22 	 0 -30 -30 80 -40 30 1 1200
+"transition standUpFrontNao standUpFrontNao start
+"transition standUpBackNao standUpBackNao start
+
+"0 28 	  100 30 0 0 - -	80 -30 0 0 - -	 			0 -30 10 30 -25 22	 0 -30 -30 80 -40 30 1 3000
+
+0 28 	  100 30 0 0 - -	80 -30 0 0 - -	 			0 -30 10 30 -25 22	 0 -30 0 60 -50 30 1 400
+"transition standUpFrontNao standUpFrontNao start
+"transition standUpBackNao standUpBackNao start
+
+0 28 	  100 70 0 0 - -	10 -28 0 0 - - 	 		-10 -30 10 30 -25 23   	-10 -45 -30 60 0 25	1 1000
+"transition standUpFrontNao standUpFrontNao start
+"transition standUpBackNao standUpBackNao start
+
+
+
+0 28  	  100 70 0 0 - - 	10 -22 0 0 - -			-10 -30 15 30 -25 23 	 -10 -45 -35 30 25 -35	1 400
+
+"transition standUpFrontNao standUpFrontNao start
+"transition standUpBackNao standUpBackNao start
+
+"Kick
+0 28 	   20 30 0 -40 - -   	110 -55 0 5 - - 			5 -20 10 30 -25 20 	5 10 -40 30 15 -35	1 100
+"transition standUpFrontNao standUpFrontNao start
+"transition standUpBackNao standUpBackNao start
+
+"0 28   	20 10 0 -80 - -  120 -60 0 5 - -	 			5 -20 15 30 -25 18   5 10 -30 30 15 -45		1 50
+"transition standUpFrontNao standUpFrontNao start
+"transition standUpBackNao standUpBackNao start
+
+
+
+"Kick end get into Stand Position
+0 28  	20 30 0 -60 - -  110 -60 0 0 - -					0 -20 15 30 -25 20 	0 8 -50 30 50 -50 	1 500
+"transition standUpFrontNao standUpFrontNao start
+"transition standUpBackNao standUpBackNao start
+
+0 28  	  90 30 0 -30 - - 	90 -30 0 0 - -	 			0 -25 15 30 -25 25 	0 -30 -65 50 0 2	1 400
+"transition standUpFrontNao standUpFrontNao start
+"transition standUpBackNao standUpBackNao start
+
+0 28  	  90 30 0 0 - -		90 -45 0 0 - -		 	0 -10 15 30 -25 20 	0 -30 -35 70 -20 10	1 500
+"transition standUpFrontNao standUpFrontNao start
+"transition standUpBackNao standUpBackNao start
+
+0 28  	  90 30 0 0 - - 	90 -30 0 0 - -			0 -30 -30 60 -30 30     0 -30 -30 60 -30 30 	1 600
+"transition standUpFrontNao standUpFrontNao start
+"transition standUpBackNao standUpBackNao start
+
+"creating stable stand
+0 28  90 30 0 0 - -	90 -30 0 0 - - 		 0 2 -30 60 -30 -2 	0  -2 -30 60 -30 2		1 800
+"transition standUpFrontNao standUpFrontNao start
+"transition standUpBackNao standUpBackNao start
+
+* *  90 30 0 0 - -	90 -30 0 0 - - 	 0 1.8 -26 71 -45 -1.8	      0 -1.8 -26 71 -45 1.8	1 600
+"transition standUpFrontNao standUpFrontNao start
+"transition standUpBackNao standUpBackNao start
+
+* *  90 30 0 0 - - 90 -30 0 0 - -	 	 0 1.8 -26 71 -45 -1.8	0 -1.8 -26 71 -45 1.8	1 200
+                                                         
+transition allMotions extern start
