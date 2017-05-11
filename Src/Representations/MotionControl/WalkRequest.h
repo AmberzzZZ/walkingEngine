@@ -50,4 +50,5 @@ STREAMABLE(WalkRequest,
   (KickType)(none) kickType,
   (bool)(false) soft, // if true, using walkKick
   (bool)(false) flash, // if true, using FlashKick 
+  (bool)(false) endOfEpisode,   // flag used to split an walking episode
 });

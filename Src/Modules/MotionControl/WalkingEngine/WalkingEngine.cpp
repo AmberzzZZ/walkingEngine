@@ -143,14 +143,14 @@ MAKE_MODULE(WalkingEngine, motionControl)
 thread_local WalkingEngine* WalkingEngine::theInstance = 0;
 
 WalkingEngine::WalkingEngine() :
-    jointRequest(),
-    active(ActionCommand::Body::NONE),
-	filterSensor(gyrXOffset,
-		  gyrYOffset,
-	      angleXOffset,
-	      angleYOffset,
-	      bodyPitchOffset),
-    t(0.0), z(0.0)
+  jointRequest(),
+  active(ActionCommand::Body::NONE),
+  filterSensor(gyrXOffset,
+    gyrYOffset,
+    angleXOffset,
+    angleYOffset,
+    bodyPitchOffset),
+  t(0.0), z(0.0)
 {
   theInstance = this;
 
@@ -271,13 +271,13 @@ void WalkingEngine::update(WalkingEngineOutput& walkingEngineOutput)
   lastOption = walkOption;
   JointValues tmpp;
   sensors.getSensorValues(theFsrSensorData, theInertialSensorData, theJointAngles);
-      SensorValues tmp = sensors;
+  SensorValues tmp = sensors;
   //    std::cout<<"sensor00---->"<<sensors.sensors[Sensors::InertialSensor_GyrX]<<","<<sensors.sensors[Sensors::InertialSensor_GyrY]<<std::endl;
-  	sensors = filterSensor.getSensors(kinematics, sensors);
+  sensors = filterSensor.getSensors(kinematics, sensors);
   //	std::cout<<"sensor11---->"<<sensors.sensors[Sensors::InertialSensor_GyrX]<<","<<sensors.sensors[Sensors::InertialSensor_GyrY]<<std::endl;
-  	kinematics.setSensorValues(sensors);
-  	kinematics.updateDHChain();
-      bodyModel.updateZMPL(sensors);
+  kinematics.setSensorValues(sensors);
+  kinematics.updateDHChain();
+  bodyModel.updateZMPL(sensors);
   if(theMotionSelection.ratios[MotionRequest::walk] > 0.f || theMotionSelection.ratios[MotionRequest::stand] > 0.f)
   {
 
@@ -304,10 +304,10 @@ void WalkingEngine::update(WalkingEngineOutput& walkingEngineOutput)
     generateDummyOutput(walkingEngineOutput);
   }
   PLOT("module:WalkingEngine:hippitch", RAD2DEG(tmpp.angles[Joints::lHipPitch]));
-      PLOT("module:WalkingEngine:anklepitch", RAD2DEG(tmpp.angles[Joints::lAnklePitch]));
-      PLOT("module:WalkingEngine:kneepitch", RAD2DEG(tmpp.angles[Joints::lKneePitch]));
-      PLOT("module:WalkingEngine:filteredgyro", (sensors.sensors[Sensor::InertialSensor_GyrY]));
-      PLOT("module:WalkingEngine:rawgyro", (tmp.sensors[Sensor::InertialSensor_GyrY]));
+  PLOT("module:WalkingEngine:anklepitch", RAD2DEG(tmpp.angles[Joints::lAnklePitch]));
+  PLOT("module:WalkingEngine:kneepitch", RAD2DEG(tmpp.angles[Joints::lKneePitch]));
+  PLOT("module:WalkingEngine:filteredgyro", (sensors.sensors[Sensor::InertialSensor_GyrY]));
+  PLOT("module:WalkingEngine:rawgyro", (tmp.sensors[Sensor::InertialSensor_GyrY]));
 }
 
 void WalkingEngine::updateMotionRequest()
@@ -388,9 +388,9 @@ void WalkingEngine::updateMotionRequest()
       if (theMotionRequest.walkRequest.mode == WalkRequest::pointMode)
       {
     	  active.forward = theMotionRequest.walkRequest.step.translation.x();
-		  active.left = theMotionRequest.walkRequest.step.translation.y();
-		  active.turn = theMotionRequest.walkRequest.step.rotation;
-		  std::cout<<"forward--->"<<active.forward<<", left---->"<<active.left<<", turn---->"<<active.turn<<std::endl;
+		    active.left = theMotionRequest.walkRequest.step.translation.y();
+		    active.turn = theMotionRequest.walkRequest.step.rotation;
+		    std::cout<<"forward--->"<<active.forward<<", left---->"<<active.left<<", turn---->"<<active.turn<<std::endl;
       }
       if(theMotionRequest.walkRequest.mode == WalkRequest::dribbleMode)
       {
@@ -398,28 +398,29 @@ void WalkingEngine::updateMotionRequest()
     	  active.left = 0;
     	  active.turn = theMotionRequest.walkRequest.step.rotation;
 //    	  std::cout<<"active.turn---->"<<active.turn<<std::endl;
-    	  std::cout<<"ok1"<<std::endl;
+
+    	  // std::cout<<"ok1"<<std::endl;
     	  if(Time::getTimeSince(TimeWhenLastDribbleEnd) < 400)
 		  {
-    		  std::cout<<"ok2"<<std::endl;
+    		  // std::cout<<"ok2"<<std::endl;
 			  toWalkRequest();
 			  active.actionType = ActionCommand::Body::WALK;
 			  active.forward = 1;
 			  active.left = 0;
 			  active.turn = 0;
 		  }
-    	  std::cout<<"isKicking------>"<<isKicking<<std::endl;
+    	  // std::cout<<"isKicking------>"<<isKicking<<std::endl;
     	  if(!isKicking)
     	  {
 			  if(!DribbleHasEnded())
 			  {
-				  std::cout<<"ok3"<<std::endl;
+				  // std::cout<<"ok3"<<std::endl;
 				  DribblePreProcess();
 				  active.actionType = ActionCommand::Body::DRIBBLE;
 			  }
 			  else
 			  {
-				  std::cout<<"ok4"<<std::endl;
+				  // std::cout<<"ok4"<<std::endl;
 				  DribbleReset();
 				  if(!LineUpHasStarted)
 				  {
@@ -436,13 +437,13 @@ void WalkingEngine::updateMotionRequest()
 				  }
 				  if(!LineUpHasEnded())
 				  {
-					  std::cout<<"ok5"<<std::endl;
+					  // std::cout<<"ok5"<<std::endl;
 					  LineUpPreProcess();
 					  active.actionType = ActionCommand::Body::LINE_UP;
 				  }
 				  else
 				  {
-					  std::cout<<"dribble"<<std::endl;
+					  // std::cout<<"dribble"<<std::endl;
 					  ActionCommand::Body::Foot dribbleFoot;
 					  if(theMotionRequest.DribbleFoot)
 					  {
@@ -476,9 +477,9 @@ void WalkingEngine::updateMotionRequest()
   else if(theMotionRequest.motion == MotionRequest::stand)
   {
 //	std::cout<<"stand"<<std::endl;
-	active.actionType = ActionCommand::Body::WALK;
-	active.forward = active.left = active.turn = 0;
-	active.bend = theMotionRequest.bend;
+    active.actionType = ActionCommand::Body::WALK;
+    active.forward = active.left = active.turn = 0;
+    active.bend = theMotionRequest.bend;
   }
 //  std::cout<<"forward1111--->"<<active.forward<<", left---->"<<active.left<<", turn---->"<<active.turn<<std::endl;
 //  std::cout<<"active.bend----->"<<active.bend<<std::endl;
@@ -2291,7 +2292,8 @@ bool WalkingEngine::LineUpHasEnded()
 //   if (abs(gapX) < 100 && abs(gapY) < 100 && fabs(request->body.turn) < 0.2) {
 //      cout << "line up hasEnded: " << gapX << " " << gapY << " " << RAD2DEG(request->body.turn) << " " << walkEngine->t << endl;
 //   }
-	std::cout<<"gapx------>"<<gapX<<", gapy------>"<<gapY<<", active.turn------>"<<RAD2DEG(active.turn)<<std::endl;
+
+	// std::cout<<"gapx------>"<<gapX<<", gapy------>"<<gapY<<", active.turn------>"<<RAD2DEG(active.turn)<<std::endl;
    return (abs(gapX) < FORWARD_THRESHOLD && abs(gapY) < LEFT_THRESHOLD
          && fabs(active.turn) < DEG2RAD(ROTATION_THRESHOLD));   //speed is overloaded for behaviour input turn threshold
 }
@@ -2318,7 +2320,7 @@ void WalkingEngine::LineUpPreProcess()
    {
       left = theBallModel.estimate.position.y() + leftGap;
    }
-	std::cout<<"left------>"<<left<<std::endl;
+	// std::cout<<"left------>"<<left<<std::endl;
    active.forward = sign(forward) * min(MAX_FORWARD_STEP, abs(forward));
    active.left = sign(left) * min(MAX_LEFT_STEP, abs(left));
 
@@ -2335,7 +2337,7 @@ void WalkingEngine::LineUpPreProcess()
       active.turn = static_cast<Angle>(-DEG2RAD(30) + heading).normalize();
    }
    active.turn = sign(active.turn) * min(MAX_TURN_STEP, fabs(active.turn / 2));
-   std::cout<<"active.turn----->"<<RAD2DEG(active.turn)<<std::endl;
+   // std::cout<<"active.turn----->"<<RAD2DEG(active.turn)<<std::endl;
 
    toWalkRequest();
    exactStepsRequested = true;

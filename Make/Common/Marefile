@@ -77,7 +77,7 @@ cppFlags = {
     "-pipe"
     "-mssse3"
     "-fPIC"
-    "-Wall"
+    //"-Wall"
     //"-Wconversion" // Activate this again, as soon as qt get rid of its conversion warnings.
     "-Wliteral-conversion"
     "-Wsign-compare"

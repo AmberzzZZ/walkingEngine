@@ -87,7 +87,8 @@ option(StandUp)
     }
     action
     {
-	Stand();
+      theMotionRequest.walkRequest.endOfEpisode = true;
+      Stand();
     }
   }
 }

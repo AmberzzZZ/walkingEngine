@@ -9,7 +9,9 @@ option(Tester)
   const float inWalkKickSideY = -15.f;
   Vector2f vector2Goal = theRobotPose.inverse() * Vector2f(4500.f, 0.f);
   Angle angleToShoot = vector2Goal.angle();
-  std::cout<<"angleToShoot------>"<<57.3*(angleToShoot)<<std::endl;
+
+  // std::cout<<"angleToShoot------>"<<57.3*(angleToShoot)<<std::endl;
+
   angleToShoot.normalize();
   Vector2f ballField = theRobotPose * ball.positionRobot;
   initial_state(start)
@@ -22,10 +24,13 @@ option(Tester)
 //		{
 //			goto stand;
 //		}
-    	if(ball.positionRobot.norm() < 300.f && fabs(angleToShoot) < 20_deg)
-    	{
-    		goto dribble;
-    	}
+
+    	// if(ball.positionRobot.norm() < 300.f && fabs(angleToShoot) < 20_deg)
+    	// {
+    	// 	goto dribble;
+    	// }
+      if(theMotionRequest.walkRequest.endOfEpisode)
+        goto stand;
     }
     action
     {
@@ -49,7 +54,8 @@ option(Tester)
 //      KickBallToPose(Vector2f(2000.f,2000.f));
 //      WalkToTarget(Pose2f(.4f, 0.f, .7f),Pose2f(90_deg,1200.f,0.f));
 //      theHeadControlMode = HeadControl::lookForward;
-//      WalkAtSpeedPercentage(Pose2f(-.5f, 0.f, 0.7f));
+
+     WalkAtSpeedPercentage(Pose2f(0.f, 0.8f, 0.f));
 //      if(state_time < 3000)
 //      {
 //        theHeadControlMode = HeadControl::lookLeftAndRight;
@@ -74,13 +80,32 @@ option(Tester)
 //        Stand();
 //        else
 //        	TurnOneRound();
-    	LookAtBall();
+    	// LookAtBall();
 //    	LookLeftAndRight();
 //        WalkToPointRunswift(Pose2f(0.8f, 0.8f, 0.8f), Pose2f(0.f, 0.f, 0.f));
-    	AlignMent();
+    	// AlignMent();
     }
   }
 
+  state(stand)
+  {
+     transition
+     {
+
+        if(state_time > 8000)
+        {
+          std::cout << "This is a new episode" << std::endl;
+          goto start;
+        }
+     }
+     action
+     {
+       theHeadControlMode = HeadControl::lookForward;
+       Stand();
+       theMotionRequest.walkRequest.endOfEpisode = false;
+     }
+  }
+    
   state(test2)
   {
      transition
@@ -158,19 +183,7 @@ option(Tester)
 //    }
 //  }
 
-    state(stand)
-    {
-       transition
-       {
-//         if(state_time > 2000)
-//           goto start;
-       }
-       action
-       {
-         theHeadControlMode = HeadControl::lookForward;
-         Stand();
-       }
-    }
+
 
 //  state(kick)
 //  {
